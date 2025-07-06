@@ -6,7 +6,7 @@
 /*   By: skohtake <skohtake@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 13:49:18 by skohtake          #+#    #+#             */
-/*   Updated: 2025/07/06 12:30:45 by skohtake         ###   ########.fr       */
+/*   Updated: 2025/07/06 12:33:40 by skohtake         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ void	handle_signals(int signum)
 
 int	main(void)
 {
-	struct sigaction sa;
+	struct sigaction	sa;
+
 	sa.sa_handler = handle_signals;
 	sa.sa_flags = 0;
 	sigemptyset(&sa.sa_mask);
