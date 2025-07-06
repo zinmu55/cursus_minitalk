@@ -18,10 +18,11 @@ int	main(int argc, char **argv)
 {
 	(void)argc;
 	int i = 0;
-	char c = (char)argv[2][i];
+	char c = (char)argv[2][i++];
 	int num_byte = 8;
 
-	// 0 is 48 in digits, 00001100 in binary of char.
+	// '0' is 48 in digits, 00001100 in binary of char.
+	// 'a' is 97 in digits, 01100001 in binary of char.
 	while(c)
 	{
 		while(num_byte--)
@@ -36,8 +37,8 @@ int	main(int argc, char **argv)
 			}
 			usleep(1000);
 		}
-		int num_byte = 8;
-		c = (char)argv[2][++i];
+		num_byte = 8;
+		c = (char)argv[2][i++];
 	}
 
 	// while(c)
