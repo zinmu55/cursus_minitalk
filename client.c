@@ -6,7 +6,7 @@
 /*   By: skohtake <skohtake@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 13:49:15 by skohtake          #+#    #+#             */
-/*   Updated: 2025/07/06 14:54:34 by skohtake         ###   ########.fr       */
+/*   Updated: 2025/07/06 15:36:28 by skohtake         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,17 +24,15 @@ int	main(int argc, char **argv)
 	i = 0;
 	c = (char)argv[2][i++];
 	num_bit = 8;
-	// '0' is 48 in digits, 00001100 in binary of char.
-	// 'a' is 97 in digits, 01100001 in binary of char.
 	while (c)
 	{
 		while (num_bit--)
 		{
-			if (c & (1 << num_bit)) //binary 1
+			if (c & (1 << num_bit))
 			{
 				kill(atoi(argv[1]), SIGUSR2);
 			}
-			else //binary 0
+			else
 			{
 				kill(atoi(argv[1]), SIGUSR1);
 			}
@@ -43,22 +41,5 @@ int	main(int argc, char **argv)
 		num_bit = 8;
 		c = (char)argv[2][i++];
 	}
-	// while(c)
-	// {
-	// 	if(c == '0')
-	// 	{
-	// 		kill(atoi(argv[1]), SIGUSR1);
-	// 	}
-	// 	else if(c == '1')
-	// 	{
-	// 		kill(atoi(argv[1]), SIGUSR2);
-	// 	}
-	// 	else
-	// 	{
-	// 		kill(atoi(argv[1]), SIGSEGV);
-	// 	}
-	// 	c = (char)argv[2][++i];
-	// 	usleep(1000);
-	// }
-	// return (0);
+	return (0);
 }
