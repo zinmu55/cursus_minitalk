@@ -6,7 +6,7 @@
 /*   By: skohtake <skohtake@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 13:49:18 by skohtake          #+#    #+#             */
-/*   Updated: 2025/07/06 12:33:40 by skohtake         ###   ########.fr       */
+/*   Updated: 2025/07/06 14:16:39 by skohtake         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,18 +16,32 @@
 
 void	handle_signals(int signum)
 {
-	if (signum == SIGUSR1)
+	static int	num_bit;
+	static char	c;
+
+	if (num_bit == 0)
+	{
+		num_bit = 8;
+		c = 0;
+	}
+	if (signum == SIGUSR1) //num_bit binary is 0.
 	{
 		printf("receiving the signal of --- %d (SIGUSR1) ---\n", signum);
+		--num_bit;
 	}
-	else if (signum == SIGUSR2)
+	else if (signum == SIGUSR2) //num_bit binary is 1.
 	{
 		printf("receiving the signal of --- %d (SIGUSR2) ---\n", signum);
+		c = c | (1 << --num_bit);
 	}
-	else
+	// else
+	// {
+	// 	printf("receiving an unknown signal, whose signum is --- %d ---\n",
+	// 			signum);
+	// }
+	if (num_bit == 0)
 	{
-		printf("receiving an unknown signal, whose signum is --- %d ---\n",
-				signum);
+		printf("---just received char of '%c'---\n", c);
 	}
 }
 
@@ -38,16 +52,18 @@ int	main(void)
 	sa.sa_handler = handle_signals;
 	sa.sa_flags = 0;
 	sigemptyset(&sa.sa_mask);
-	if (sigaction(SIGUSR1, &sa, NULL) == -1)
-	{
-		perror("SIGUSR1 failed\n");
-		return (1);
-	}
-	if (sigaction(SIGUSR2, &sa, NULL) == -1)
-	{
-		perror("SIGUSR2 failed\n");
-		return (1);
-	}
+	sigaction(SIGUSR1, &sa, NULL);
+	sigaction(SIGUSR2, &sa, NULL);
+	// if (sigaction(SIGUSR1, &sa, NULL) == -1)
+	// {
+	// 	perror("SIGUSR1 failed\n");
+	// 	return (1);
+	// }
+	// if (sigaction(SIGUSR2, &sa, NULL) == -1)
+	// {
+	// 	perror("SIGUSR2 failed\n");
+	// 	return (1);
+	// }
 	printf("PID of this process is --- %d ---.\n", getpid());
 	printf("Send signal...\n");
 	printf("Just waiting...\n");
