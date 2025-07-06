@@ -6,7 +6,7 @@
 /*   By: skohtake <skohtake@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 13:49:18 by skohtake          #+#    #+#             */
-/*   Updated: 2025/07/06 14:16:39 by skohtake         ###   ########.fr       */
+/*   Updated: 2025/07/06 14:28:11 by skohtake         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,12 @@ void	handle_signals(int signum)
 	}
 	if (signum == SIGUSR1) //num_bit binary is 0.
 	{
-		printf("receiving the signal of --- %d (SIGUSR1) ---\n", signum);
+		// printf("receiving the signal of --- %d (SIGUSR1) ---\n", signum);
 		--num_bit;
 	}
 	else if (signum == SIGUSR2) //num_bit binary is 1.
 	{
-		printf("receiving the signal of --- %d (SIGUSR2) ---\n", signum);
+		// printf("receiving the signal of --- %d (SIGUSR2) ---\n", signum);
 		c = c | (1 << --num_bit);
 	}
 	// else
@@ -41,7 +41,8 @@ void	handle_signals(int signum)
 	// }
 	if (num_bit == 0)
 	{
-		printf("---just received char of '%c'---\n", c);
+		write(1, &c, 1);
+		// printf("---just received char of '%c'---\n", c);
 	}
 }
 
