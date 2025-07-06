@@ -19,24 +19,43 @@ int	main(int argc, char **argv)
 	(void)argc;
 	int i = 0;
 	char c = (char)argv[2][i];
-	// int byte =8;
+	int num_byte = 8;
 
+	// 0 is 48 in digits, 00001100 in binary of char.
 	while(c)
 	{
-		if(c == '0')
+		while(num_byte--)
 		{
-			kill(atoi(argv[1]), SIGUSR1);
+			if(c & (1 << num_byte))	//binary 1
+			{
+				kill(atoi(argv[1]), SIGUSR2);
+			}
+			else	//binary 0
+			{
+				kill(atoi(argv[1]), SIGUSR1);
+			}
+			usleep(1000);
 		}
-		else if(c == '1')
-		{
-			kill(atoi(argv[1]), SIGUSR2);
-		}
-		else
-		{
-			kill(atoi(argv[1]), SIGSEGV);
-		}
+		int num_byte = 8;
 		c = (char)argv[2][++i];
-		usleep(1000);
 	}
-	return (0);
+
+	// while(c)
+	// {
+	// 	if(c == '0')
+	// 	{
+	// 		kill(atoi(argv[1]), SIGUSR1);
+	// 	}
+	// 	else if(c == '1')
+	// 	{
+	// 		kill(atoi(argv[1]), SIGUSR2);
+	// 	}
+	// 	else
+	// 	{
+	// 		kill(atoi(argv[1]), SIGSEGV);
+	// 	}
+	// 	c = (char)argv[2][++i];
+	// 	usleep(1000);
+	// }
+	// return (0);
 }
