@@ -6,7 +6,7 @@
 #    By: shintarokohtake <shintarokohtake@studen    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/06 16:21:28 by shintarokoh       #+#    #+#              #
-#    Updated: 2025/07/08 20:15:23 by shintarokoh      ###   ########.fr        #
+#    Updated: 2025/07/09 08:41:05 by shintarokoh      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,13 +25,13 @@ RM := rm -f
 all : $(NAME)
 
 server : $(SERVER_OBJS)
-	$(CC) $(CFLAGS) $< -o $@
+	$(CC) $(CFLAGS) $^ -o $@
 
 client : $(CLIENT_OBJS)
-	$(CC) $(CFLAGS) $< -o $@
+	$(CC) $(CFLAGS) $^ -o $@
 
 %.o : %.c
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) -c $^ -o $@
 
 clean : 
 	$(RM) $(OBJS)
