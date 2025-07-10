@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   client.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skohtake <skohtake@student.42.fr>          +#+  +:+       +#+        */
+/*   By: shintarokohtake <shintarokohtake@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 13:49:15 by skohtake          #+#    #+#             */
-/*   Updated: 2025/07/10 11:59:33 by skohtake         ###   ########.fr       */
+/*   Updated: 2025/07/11 08:14:47 by shintarokoh      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,21 @@
 #include <stdlib.h>
 #include <unistd.h>
 
+void client_error_msg(void)
+{
+	ft_putstr_fd(" Error : Check how to use \"client\" program. ", 1);
+	ft_putchar_fd('\n', 1);
+}
+
 int	main(int argc, char **argv)
 {
 	int		i;
+	int 	kill_res;
 	char	c;
 	int		num_bit;
 
-	(void)argc;
+	if(argc != 3)
+		return (client_error_msg(),EXIT_FAILURE);
 	i = 0;
 	c = (char)argv[2][i++];
 	num_bit = 8;
@@ -30,13 +38,15 @@ int	main(int argc, char **argv)
 		while (num_bit--)
 		{
 			if (c & (1 << num_bit))
-				kill(atoi(argv[1]), SIGUSR2);
+				kill_res = kill(ft_atoi(argv[1]), SIGUSR2);
 			else
-				kill(atoi(argv[1]), SIGUSR1);
+				kill_res = kill(ft_atoi(argv[1]), SIGUSR1);
+			if(kill_res != 0)
+				return(client_error_msg(),EXIT_FAILURE);
 			usleep(100);
 		}
 		num_bit = 8;
 		c = (char)argv[2][i++];
 	}
-	return (0);
+	return (EXIT_SUCCESS);
 }
