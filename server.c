@@ -6,10 +6,11 @@
 /*   By: skohtake <skohtake@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 13:49:18 by skohtake          #+#    #+#             */
-/*   Updated: 2025/07/06 15:38:18 by skohtake         ###   ########.fr       */
+/*   Updated: 2025/07/10 10:10:52 by skohtake         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
 #include <signal.h>
 #include <stdio.h>
 #include <unistd.h>
@@ -47,6 +48,7 @@ int	main(void)
 	sigemptyset(&sa.sa_mask);
 	sigaction(SIGUSR1, &sa, NULL);
 	sigaction(SIGUSR2, &sa, NULL);
+	ft_putstr_fd("=== libft test ===", 1);
 	printf("PID of this process is --- %d ---.\n", getpid());
 	printf("Send signal...\n");
 	printf("Just waiting...\n");

@@ -6,10 +6,11 @@
 /*   By: skohtake <skohtake@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 13:49:15 by skohtake          #+#    #+#             */
-/*   Updated: 2025/07/06 15:36:28 by skohtake         ###   ########.fr       */
+/*   Updated: 2025/07/10 10:10:50 by skohtake         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
 #include <signal.h>
 #include <stdlib.h>
 #include <unistd.h>
