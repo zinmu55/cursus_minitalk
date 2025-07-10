@@ -6,7 +6,7 @@
 /*   By: skohtake <skohtake@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 13:49:15 by skohtake          #+#    #+#             */
-/*   Updated: 2025/07/10 10:10:50 by skohtake         ###   ########.fr       */
+/*   Updated: 2025/07/10 10:16:05 by skohtake         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,9 @@ int	main(int argc, char **argv)
 		while (num_bit--)
 		{
 			if (c & (1 << num_bit))
-			{
 				kill(atoi(argv[1]), SIGUSR2);
-			}
 			else
-			{
 				kill(atoi(argv[1]), SIGUSR1);
-			}
 			usleep(1000);
 		}
 		num_bit = 8;
