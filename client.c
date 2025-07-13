@@ -6,7 +6,7 @@
 /*   By: skohtake <skohtake@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 13:49:15 by skohtake          #+#    #+#             */
-/*   Updated: 2025/07/13 15:29:59 by skohtake         ###   ########.fr       */
+/*   Updated: 2025/07/13 16:31:00 by skohtake         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,12 @@
 
 void	client_error_msg(void)
 {
-	ft_putstr_fd(" Error : Check how to use \"client\" program. ", 1);
-	ft_putchar_fd('\n', 1);
+	ft_putendl_fd(" Error : Check how to use \"client\" program ", 1);
+}
+
+void	kill_error_msg(void)
+{
+	ft_putendl_fd(" Error : kill failed (Please check PID) ", 1);
 }
 
 int	send_char(pid_t pid, char c)
@@ -34,10 +38,13 @@ int	send_char(pid_t pid, char c)
 		else
 			kill_res = kill(pid, SIGUSR1);
 		if (kill_res != 0)
-			return (client_error_msg(), EXIT_FAILURE);
+		{
+			kill_error_msg();
+			exit(EXIT_FAILURE);
+		}
 		usleep(100);
 	}
-	return (0);
+	return (EXIT_SUCCESS);
 }
 
 int	main(int argc, char **argv)
